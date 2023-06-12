@@ -1,0 +1,18 @@
+.gallery__add {
+  width: 150px;
+  height: 50px;
+  padding: 0;
+  margin: 0 0 0 auto;
+  background-color: #000;
+  border: 2px solid #FFFFFF;
+  background-image: url(../../../images/plus.svg);
+  background-color: #000;
+  background-size: 22px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.gallery__add:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}

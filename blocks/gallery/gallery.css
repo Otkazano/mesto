@@ -1,0 +1,12 @@
+.gallery {
+  max-width: 880px;
+  margin: 0 auto 67px;
+  display: -ms-grid;
+  display: grid;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  grid-template-columns: repeat(auto-fit, 282px);
+  grid-column-gap: 17px;
+  grid-row-gap: 20px;
+}

@@ -1,0 +1,15 @@
+.profile__edit {
+  height: 24px;
+  width: 24px;
+  background-image: url(../../../images/pen.svg);
+  background-color: #000;
+  background-size: 10px;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: 1px solid #FFFFFF;
+}
+
+.profile__edit:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}

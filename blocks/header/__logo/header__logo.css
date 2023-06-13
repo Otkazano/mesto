@@ -4,3 +4,16 @@
   max-width: 142px;
   max-height: 33px;
 }
+
+@media (max-width: 930px) {
+  .header__logo {
+    padding: 0 27px 31.6px;
+  }
+}
+
+@media (max-width: 600px) {
+  .header__logo {
+    max-width: 104px;
+    max-height: 25px;
+  }
+}

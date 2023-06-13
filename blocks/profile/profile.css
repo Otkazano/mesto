@@ -9,3 +9,10 @@
   -ms-flex-align: center;
   align-items: center;
 }
+
+@media (max-width: 930px) {
+  .profile {
+    flex-direction: column;
+    margin: 42px auto 36px;
+  }
+}

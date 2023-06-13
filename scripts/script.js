@@ -1,6 +1,6 @@
 'use strict';
 
-const editButtonElement = document.querySelector('.profile__edit');
+const editButtonElement = document.querySelector('.profile__btn-edit');
 const closeButtonElemnt = document.querySelector('.popup__btn-close');
 const saveButtonElemnt = document.querySelector('.popup__btn-save');
 const popupElemnt = document.querySelector('.popup');

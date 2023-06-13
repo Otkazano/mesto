@@ -1,4 +1,4 @@
-.gallery__add {
+.profile__btn-add {
   width: 150px;
   height: 50px;
   padding: 0;
@@ -12,13 +12,13 @@
   background-position: center;
 }
 
-.gallery__add:hover {
+.profile__btn-add:hover {
   opacity: 0.6;
   cursor: pointer;
 }
 
 @media (max-width: 930px) {
-  .gallery__add {
+  .profile__btn-add {
     margin: 0;
     width: 282px;
   }

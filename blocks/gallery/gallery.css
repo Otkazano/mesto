@@ -1,6 +1,6 @@
 .gallery {
   max-width: 880px;
-  margin: 0 auto 67px;
+  margin: 0 auto 69px;
   display: -ms-grid;
   display: grid;
   -webkit-box-pack: center;
@@ -13,6 +13,6 @@
 
 @media (max-width: 500px) {
   .gallery { 
-    margin: 0 auto 48px;
+    margin: 0 auto 51px;
   }
 }

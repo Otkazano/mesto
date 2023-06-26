@@ -9,10 +9,10 @@ const formProfileElement = document.querySelector('.popup-profile__form')
 const nameProfileElement = document.querySelector('.profile__name')
 const aboutProfileElement = document.querySelector('.profile__about')
 const nameProfilePopupElement = document.querySelector(
-  '.popup-profile__input_el_name'
+  '.popupprofile__input_el_name'
 )
 const aboutProfilePopupElemnt = document.querySelector(
-  '.popup-profile__input_el_about'
+  '.popupprofile__input_el_about'
 )
 
 function openEditProfile () {
@@ -24,10 +24,10 @@ function openEditProfile () {
 function editProfile (e) {
   e.preventDefault()
   nameProfileElement.textContent = document.querySelector(
-    '.popup-profile__input_el_name'
+    '.popupprofile__input_el_name'
   ).value
   aboutProfileElement.textContent = document.querySelector(
-    '.popup-profile__input_el_about'
+    '.popupprofile__input_el_about'
   ).value
   popupProfileElemnt.classList.toggle('popup_opened')
 }
@@ -42,10 +42,10 @@ const popupNewImageElemnt = document.querySelector('.popup-newimage')
 
 const formNewImageElement = document.querySelector('.popup-newimage__form')
 const newImageNamePopupElement = document.querySelector(
-  '.popup-newimage__input_el_name'
+  '.popupnewimage__input_el_name'
 )
 const newImageLinkPopupElemnt = document.querySelector(
-  '.popup-newimage__input_el_link'
+  '.popupnewimage__input_el_link'
 )
 
 function openPopupNewImage () {

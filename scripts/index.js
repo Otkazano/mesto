@@ -1,13 +1,9 @@
 'use strict'
 
-// popup for editing the profile
+// Попап редакции профиля
 
 const editProfileButtonElement = document.querySelector('.profile__btn-edit')
-const closeProfileButtonElemnt = document.querySelector(
-  '.popup-profile__btn-close'
-)
 const popupProfileElemnt = document.querySelector('.popup-profile')
-
 const formProfileElement = document.querySelector('.popup-profile__form')
 
 const nameProfileElement = document.querySelector('.profile__name')
@@ -19,7 +15,7 @@ const aboutProfilePopupElemnt = document.querySelector(
   '.popup-profile__input_el_about'
 )
 
-function openAndClosePopupEditProfile () {
+function openEditProfile () {
   popupProfileElemnt.classList.toggle('popup_opened')
   nameProfilePopupElement.value = nameProfileElement.textContent
   aboutProfilePopupElemnt.value = aboutProfileElement.textContent
@@ -36,16 +32,12 @@ function editProfile (e) {
   popupProfileElemnt.classList.toggle('popup_opened')
 }
 
-editProfileButtonElement.addEventListener('click', openAndClosePopupEditProfile)
-closeProfileButtonElemnt.addEventListener('click', openAndClosePopupEditProfile)
+editProfileButtonElement.addEventListener('click', openEditProfile)
 formProfileElement.addEventListener('submit', editProfile)
 
-// popup for creating a new image
+// Добавление фото
 
 const newImageButtonElement = document.querySelector('.profile__btn-add')
-const closeNewImageButtonElemnt = document.querySelector(
-  '.popup-newimage__btn-close'
-)
 const popupNewImageElemnt = document.querySelector('.popup-newimage')
 
 const formNewImageElement = document.querySelector('.popup-newimage__form')
@@ -56,17 +48,18 @@ const newImageLinkPopupElemnt = document.querySelector(
   '.popup-newimage__input_el_link'
 )
 
-function openAndClosePopupNewImage () {
+function openPopupNewImage () {
   popupNewImageElemnt.classList.toggle('popup_opened')
   newImageNamePopupElement.value = ''
   newImageLinkPopupElemnt.value = ''
 }
 
-function createNewImage (e) {
+newImageButtonElement.addEventListener('click', openPopupNewImage)
+
+function createNewCard (e) {
   e.preventDefault()
   const galleryTemplate = document.querySelector('#template-gallery').content
   const galleryElement = document.querySelector('.gallery')
-
   const galleryItemElement = galleryTemplate
     .querySelector('.gallery__item')
     .cloneNode(true)
@@ -79,63 +72,117 @@ function createNewImage (e) {
     '.gallery__photo'
   ).alt = `Достопримечательность из: ${newImageNamePopupElement.value}`
 
-  galleryElement.prepend(galleryItemElement);
-  popupNewImageElemnt.classList.toggle('popup_opened');
+  galleryElement.prepend(galleryItemElement)
+  popupNewImageElemnt.classList.toggle('popup_opened')
 
-  // Likes
+  // Лайк
   const likeButtonElement = galleryElement.querySelector('.gallery__btn-like')
-
   likeButtonElement.addEventListener('click', function (event) {
-    event.target.classList.toggle('gallery__like_active');
+    event.target.classList.toggle('gallery__like_active')
   })
 
-  // Delete cards
-
+  // Удалить карточки
   const deleteButtonElement = document.querySelector('.gallery__delete')
-
   deleteButtonElement.addEventListener('click', function () {
     const galleryItem = deleteButtonElement.closest('.gallery__item')
     galleryItem.remove()
   })
+
+  // Открыть изображение
+  const imagePopup = document.querySelector('.popup-image')
+  const openImagePopupElement = galleryItemElement.querySelector(
+    '.gallery__photo'
+  )
+
+  openImagePopupElement.addEventListener('click', function () {
+    imagePopup.classList.toggle('popup_opened')
+    document.querySelector(
+      '.popup-image__about'
+    ).textContent = galleryItemElement.querySelector(
+      '.gallery__location'
+    ).textContent
+    document.querySelector(
+      '.popup-image__img'
+    ).src = galleryItemElement.querySelector('.gallery__photo').src
+    document.querySelector(
+      '.popup-image__img'
+    ).alt = `Достопримечательность из: ${name}`
+  })
+
+  const closeImage = document.querySelector('.popup-image__btn-close')
+  closeImage.addEventListener('click', function () {
+    imagePopup.classList.remove('popup_opened')
+  })
 }
 
-newImageButtonElement.addEventListener('click', openAndClosePopupNewImage)
-closeNewImageButtonElemnt.addEventListener('click', openAndClosePopupNewImage)
-formNewImageElement.addEventListener('submit', createNewImage)
+formNewImageElement.addEventListener('submit', createNewCard)
 
-// loading start pack cards
+// Загрузка первых карточек на страницу
 
-initialCards.forEach(function loadPackCards ({name, link}) {
+initialCards.forEach(function loadPackCards ({ name, link }) {
   const galleryTemplate = document.querySelector('#template-gallery').content
   const galleryElement = document.querySelector('.gallery')
-
   const galleryItemElement = galleryTemplate
     .querySelector('.gallery__item')
     .cloneNode(true)
 
-  galleryItemElement.querySelector('.gallery__location').textContent =
-    name
-  galleryItemElement.querySelector('.gallery__photo').src =
-    link
+  galleryItemElement.querySelector('.gallery__location').textContent = name
+  galleryItemElement.querySelector('.gallery__photo').src = link
   galleryItemElement.querySelector(
     '.gallery__photo'
   ).alt = `Достопримечательность из: ${name}`
 
-  galleryElement.prepend(galleryItemElement);
+  galleryElement.prepend(galleryItemElement)
 
-  // Likes
+  // Лайк
   const likeButtonElement = galleryElement.querySelector('.gallery__btn-like')
-
   likeButtonElement.addEventListener('click', function (event) {
-    event.target.classList.toggle('gallery__like_active');
+    event.target.classList.toggle('gallery__like_active')
   })
 
-  // Delete cards
-
+  // Удалить карточки
   const deleteButtonElement = document.querySelector('.gallery__delete')
-
   deleteButtonElement.addEventListener('click', function () {
     const galleryItem = deleteButtonElement.closest('.gallery__item')
     galleryItem.remove()
-  });
-});
+  })
+
+  // Открыть изображение
+  const imagePopup = document.querySelector('.popup-image')
+  const openImagePopupElement = galleryItemElement.querySelector(
+    '.gallery__photo'
+  )
+
+  openImagePopupElement.addEventListener('click', function () {
+    imagePopup.classList.toggle('popup_opened')
+    document.querySelector(
+      '.popup-image__about'
+    ).textContent = galleryItemElement.querySelector(
+      '.gallery__location'
+    ).textContent
+    document.querySelector(
+      '.popup-image__img'
+    ).src = galleryItemElement.querySelector('.gallery__photo').src
+    document.querySelector(
+      '.popup-image__img'
+    ).alt = `Достопримечательность из: ${name}`
+  })
+
+  const buttonCloseEditProfile = document.querySelector(
+    '.popup-profile__btn-close'
+  )
+  const buttonCloseNewImage = document.querySelector(
+    '.popup-newimage__btn-close'
+  )
+  const buttonCloseIamge = document.querySelector('.popup-image__btn-close')
+
+  function closePopup () {
+    imagePopup.classList.remove('popup_opened')
+    popupNewImageElemnt.classList.remove('popup_opened')
+    popupProfileElemnt.classList.remove('popup_opened')
+  }
+
+  buttonCloseEditProfile.addEventListener('click', closePopup)
+  buttonCloseNewImage.addEventListener('click', closePopup)
+  buttonCloseIamge.addEventListener('click', closePopup)
+})

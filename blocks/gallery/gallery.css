@@ -10,7 +10,9 @@
 
 @media (max-width: 930px) {
   .gallery {
-    justify-content: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
   }
 }
 

@@ -1,23 +1,22 @@
 'use strict';
 
-function openPopup(e) {
-  e.classList.add('popup_opened');
+function openPopup(popup) {
+  popup.classList.add('popup_opened');
 }
 
-function closePopup() {
-  const opened = document.querySelector('.popup_opened');
-  opened.classList.remove('popup_opened');
+function closePopup(popup) {
+  popup.classList.remove('popup_opened');
 }
 
-buttonCloseEditProfile.addEventListener('click', closePopup);
-buttonCloseNewImage.addEventListener('click', closePopup);
-buttonCloseIamge.addEventListener('click', closePopup);
+buttonCloseEditProfile.addEventListener('click', () => closePopup(popupProfile));
+buttonCloseNewImage.addEventListener('click', () => closePopup(popupGallery));
+buttonCloseImage.addEventListener('click', () => closePopup(imagePopup));
 
 
 function openPopupProfile() {
-  openPopup(popupProfile);
   popupProfileFormName.value = profileName.textContent;
   popupProfileFormAbout.value = profileAbout.textContent;
+  openPopup(popupProfile);
 }
 btnPopupProfileOpen.addEventListener('click', openPopupProfile);
 
@@ -26,15 +25,14 @@ function editProfile(e) {
   e.preventDefault();
   profileName.textContent = popupProfileFormName.value;
   profileAbout.textContent = popupProfileFormAbout.value;
-  closePopup();
+  closePopup(popupProfile);
 }
-formPoupProfile.addEventListener('submit', editProfile);
+formPopupProfile.addEventListener('submit', editProfile);
 
 
 function openPopupGallery() {
+  formPopupGallery.reset();
   openPopup(popupGallery);
-  popupGalleryFormName.value = '';
-  popupGalleryFormLink.value = '';
 }
 btnPopupGalleryOpen.addEventListener('click', openPopupGallery);
 
@@ -62,12 +60,10 @@ function createCard({ name, link }) {
   const openImagePopupElement = galleryItem.querySelector('.gallery__photo');
 
   openImagePopupElement.addEventListener('click', function () {
-    imagePopup.classList.toggle('popup_opened');
-    imagePopup.querySelector('.popup-image__about').textContent = name;
-    imagePopup.querySelector('.popup-image__img').src = link;
-    imagePopup.querySelector(
-      '.popup-image__img'
-    ).alt = `Достопримечательность из: ${name}`;
+    imagePopupAbout.textContent = name;
+    imagePopupImage.src = link;
+    imagePopupImage.alt = `Достопримечательность из: ${name}`;
+    openPopup(imagePopup);
   });
 
   return galleryItem;
@@ -83,7 +79,7 @@ function addNewCard(e) {
     link
   });
   galleryElement.prepend(galleryItem);
-  closePopup();
+  closePopup(popupGallery);
 }
 formPopupGallery.addEventListener('submit', addNewCard);
 

@@ -34,7 +34,7 @@ const popupProfile = document.querySelector('.popup-profile');
 const popupProfileFormName = document.querySelector('.popup__input_el_name-profile');
 const popupProfileFormAbout = document.querySelector('.popup__input_el_about-profile');
 
-const formPoupProfile = document.querySelector('.popup-profile__form');
+const formPopupProfile = document.querySelector('.popup-profile__form');
 const btnPopupProfileClose = document.querySelector('.popup-profile__btn-close');
 
 const btnPopupGalleryOpen = document.querySelector('.profile__btn-add');
@@ -55,4 +55,7 @@ const popup = document.querySelector('.popup');
 
 const buttonCloseEditProfile = document.querySelector('.popup-profile__btn-close');
 const buttonCloseNewImage = document.querySelector('.popup-newimage__btn-close');
-const buttonCloseIamge = document.querySelector('.popup-image__btn-close');
+const buttonCloseImage = document.querySelector('.popup-image__btn-close');
+
+const imagePopupAbout = imagePopup.querySelector('.popup-image__about');
+const imagePopupImage = imagePopup.querySelector('.popup-image__img');

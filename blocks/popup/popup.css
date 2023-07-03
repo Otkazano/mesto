@@ -10,9 +10,9 @@
   display: flex;
   opacity: 0;
   visibility: hidden;
-  -webkit-transition: opacity 0.5s ease;
-  -o-transition: opacity 0.5s ease;
-  transition: opacity 0.5s ease;
+  -webkit-transition: 0.5s ease;
+  -o-transition: 0.5s ease;
+  transition: 0.5s ease;
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   justify-content: center;

@@ -1,7 +1,7 @@
-"use strict";
+'use strict';
 
 function openPopup(e) {
-  e.classList.add("popup_opened");
+  e.classList.add('popup_opened');
 }
 
 function closePopup() {
@@ -20,7 +20,7 @@ function openPopupProfile() {
   popupProfileFormName.value = profileName.textContent;
   popupProfileFormAbout.value = profileAbout.textContent;
 }
-btnPopupProfileOpen.addEventListener("click", openPopupProfile);
+btnPopupProfileOpen.addEventListener('click', openPopupProfile);
 
 // Отправка Формы Редактирования Профиля
 
@@ -30,47 +30,47 @@ function editProfile(e) {
   profileAbout.textContent = popupProfileFormAbout.value;
   closePopup();
 }
-formPoupProfile.addEventListener("submit", editProfile);
+formPoupProfile.addEventListener('submit', editProfile);
 
 // Открытие Попапа Новых Карточек
 
 function openPopupGallery() {
   openPopup(popupGallery);
-  popupGalleryFormName.value = "";
-  popupGalleryFormLink.value = "";
+  popupGalleryFormName.value = '';
+  popupGalleryFormLink.value = '';
 }
-btnPopupGalleryOpen.addEventListener("click", openPopupGallery);
+btnPopupGalleryOpen.addEventListener('click', openPopupGallery);
 
 // Создание Карточек
 
 function createCard({ name, link }) {
   const clone = templateElement.content.cloneNode(true);
-  const galleryItem = clone.querySelector(".gallery__item");
-  galleryItem.querySelector(".gallery__location").textContent = name;
-  galleryItem.querySelector(".gallery__photo").src = link;
+  const galleryItem = clone.querySelector('.gallery__item');
+  galleryItem.querySelector('.gallery__location').textContent = name;
+  galleryItem.querySelector('.gallery__photo').src = link;
   galleryItem.querySelector(
-    ".gallery__photo"
+    '.gallery__photo'
   ).alt = `Достопримечательность из ${name}`;
 
-  const btnDeleteCard = galleryItem.querySelector(".gallery__delete");
-  btnDeleteCard.addEventListener("click", function () {
-    const galleryItem = btnDeleteCard.closest(".gallery__item");
+  const btnDeleteCard = galleryItem.querySelector('.gallery__delete');
+  btnDeleteCard.addEventListener('click', function () {
+    const galleryItem = btnDeleteCard.closest('.gallery__item');
     galleryItem.remove();
   });
 
-  const btnLikeCard = galleryItem.querySelector(".gallery__btn-like");
-  btnLikeCard.addEventListener("click", function (event) {
-    event.target.classList.toggle("gallery__like_active");
+  const btnLikeCard = galleryItem.querySelector('.gallery__btn-like');
+  btnLikeCard.addEventListener('click', function (event) {
+    event.target.classList.toggle('gallery__like_active');
   });
 
-  const openImagePopupElement = galleryItem.querySelector(".gallery__photo");
+  const openImagePopupElement = galleryItem.querySelector('.gallery__photo');
 
-  openImagePopupElement.addEventListener("click", function () {
-    imagePopup.classList.toggle("popup_opened");
-    imagePopup.querySelector(".popup-image__about").textContent = name;
-    imagePopup.querySelector(".popup-image__img").src = link;
+  openImagePopupElement.addEventListener('click', function () {
+    imagePopup.classList.toggle('popup_opened');
+    imagePopup.querySelector('.popup-image__about').textContent = name;
+    imagePopup.querySelector('.popup-image__img').src = link;
     imagePopup.querySelector(
-      ".popup-image__img"
+      '.popup-image__img'
     ).alt = `Достопримечательность из: ${name}`;
   });
 
@@ -90,7 +90,7 @@ function addNewCard(e) {
   galleryElement.prepend(galleryItem);
   closePopup();
 }
-formPopupGallery.addEventListener("submit", addNewCard);
+formPopupGallery.addEventListener('submit', addNewCard);
 
 // Рендер Начальных Карточек
 initialCards.forEach(item => {

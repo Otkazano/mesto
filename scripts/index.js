@@ -13,7 +13,6 @@ buttonCloseEditProfile.addEventListener('click', closePopup);
 buttonCloseNewImage.addEventListener('click', closePopup);
 buttonCloseIamge.addEventListener('click', closePopup);
 
-// Открытие Попапа Редактирования Профиля
 
 function openPopupProfile() {
   openPopup(popupProfile);
@@ -22,7 +21,6 @@ function openPopupProfile() {
 }
 btnPopupProfileOpen.addEventListener("click", openPopupProfile);
 
-// Отправка Формы Редактирования Профиля
 
 function editProfile(e) {
   e.preventDefault();
@@ -32,7 +30,6 @@ function editProfile(e) {
 }
 formPoupProfile.addEventListener("submit", editProfile);
 
-// Открытие Попапа Новых Карточек
 
 function openPopupGallery() {
   openPopup(popupGallery);
@@ -41,7 +38,6 @@ function openPopupGallery() {
 }
 btnPopupGalleryOpen.addEventListener("click", openPopupGallery);
 
-// Создание Карточек
 
 function createCard({ name, link }) {
   const clone = templateElement.content.cloneNode(true);
@@ -77,7 +73,6 @@ function createCard({ name, link }) {
   return galleryItem;
 }
 
-// Добавление Карточек
 
 function addNewCard(e) {
   e.preventDefault();
@@ -92,7 +87,7 @@ function addNewCard(e) {
 }
 formPopupGallery.addEventListener("submit", addNewCard);
 
-// Рендер Начальных Карточек
+
 initialCards.forEach(item => {
   const galleryItem = createCard(item);
   galleryElement.prepend(galleryItem);

@@ -49,11 +49,14 @@
     <div class="popup__container">
       <button type="button" class="popup__btn-close popup-profile__btn-close"></button>
       <h3 class="popup__title">Редактировать профиль</h3>
-      <form action="#" id="profile-form" class="popup__form popup-profile__form" method="POST" name="profile-form">
-        <input type="text" name="nameprofile" class="popup__input popup__input_el_name-profile" required
-          placeholder="Введите имя" autocomplete="off" />
-        <input type="text" name="about" class="popup__input popup__input_el_about-profile" required
-          placeholder="Введите профессию" autocomplete="off" />
+      <form novalidate action="#" id="profile-form" class="popup__form popup-profile__form" method="POST"
+        name="profile-form">
+        <input type="text" id="nameprofile" name="nameprofile" class="popup__input popup__input_el_name-profile" required
+          placeholder="Имя" autocomplete="off" minlength="2" maxlength="40" />
+        <span class="popup___error-message" id="error-nameprofile"></span>
+        <input type="text" id="about" name="about" class="popup__input popup__input_el_about-profile" required placeholder="О себе"
+          autocomplete="off" minlength="2" maxlength="200" />
+        <span class="popup___error-message" id="error-about"></span>
       </form>
       <button type="submit" form="profile-form" class="popup__btn-save popup-profile__btn-save">
         Сохранить
@@ -65,11 +68,14 @@
     <div class="popup__container">
       <button type="button" class="popup__btn-close popup-newimage__btn-close"></button>
       <h3 class="popup__title">Новое место</h3>
-      <form action="#" id="newimage-form" class="popup__form popup-newimage__form" method="POST" name="newimage-form">
-        <input type="text" name="namenewimage" class="popup__input popup__input_el_name-newimage" required
-          placeholder="Название" autocomplete="off" />
-        <input type="url" name="about" class="popup__input popup__input_el_link-newimage" required
+      <form novalidate action="#" id="newimage-form" class="popup__form popup-newimage__form" method="POST"
+        name="newimage-form">
+        <input type="text" id="namenewimage" name="namenewimage" class="popup__input popup__input_el_name-newimage" required
+          placeholder="Название" autocomplete="off" minlength="2" maxlength="30" />
+        <span class="popup___error-message" id="error-namenewimage"></span>
+        <input type="url" id="linknewimage" name="linknewimage" class="popup__input popup__input_el_link-newimage" required
           placeholder="Ссылка на картинку" autocomplete="off" />
+        <span class="popup___error-message" id="error-linknewimage"></span>
       </form>
       <button type="submit" form="newimage-form" class="popup__btn-save popup-newimage__btn-save">
         Создать
@@ -87,6 +93,7 @@
 
   <script src="./scripts/constants.js"></script>
   <script src="./scripts/index.js"></script>
+  <script src="./scripts/validate.js"></script>
 </body>
 
 </html>

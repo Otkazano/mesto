@@ -3,3 +3,7 @@
   max-height: 75vh;
   display: block;
 }
+
+.popup-image__img:hover {
+  cursor: default;
+}

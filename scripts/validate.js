@@ -42,11 +42,9 @@ function toggleButtonState(inputList, buttonElement) {
   if (hasInvalidInput(inputList)) {
     buttonElement.classList.remove('popup__btn-save');
     buttonElement.classList.add('popup__btn-inactive');
-    buttonElement.setAttribute('disabled', true);
   } else {
     buttonElement.classList.add('popup__btn-save');
     buttonElement.classList.remove('popup__btn-inactive');
-    buttonElement.removeAttribute('disabled', false);
   }
 }
 

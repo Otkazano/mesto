@@ -2,22 +2,42 @@
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
-}
+};
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
-}
+  document.removeEventListener('keydown', () => closePopupByEsc(event, popup));
+  popup.removeEventListener('click', () => closePopupByOverlayClick(event, popup));
+};
+
+function closePopupByEsc(event, popup) {
+  if (event.key === "Escape") {
+    closePopup(popup);
+  };
+};
+
+function closePopupByOverlayClick(event, popup) {
+  if (event.target === event.currentTarget) {
+    closePopup(popup);
+  };
+};
 
 buttonCloseEditProfile.addEventListener('click', () => closePopup(popupProfile));
 buttonCloseNewImage.addEventListener('click', () => closePopup(popupGallery));
 buttonCloseImage.addEventListener('click', () => closePopup(imagePopup));
 
-
 function openPopupProfile() {
   popupProfileFormName.value = profileName.textContent;
   popupProfileFormAbout.value = profileAbout.textContent;
+  const inputList = Array.from(popupProfile.querySelectorAll('.popup__input'));
+  toggleButtonState(inputList, btnPopupProfileSave);
+  hideError(popupProfile, popupProfileFormName);
+  hideError(popupProfile, popupProfileFormAbout);
   openPopup(popupProfile);
-}
+  const popup = popupProfile;
+  document.addEventListener('keydown', () => closePopupByEsc(event, popup));
+  popup.addEventListener('click', () => closePopupByOverlayClick(event, popup));
+};
 btnPopupProfileOpen.addEventListener('click', openPopupProfile);
 
 
@@ -26,14 +46,21 @@ function editProfile(e) {
   profileName.textContent = popupProfileFormName.value;
   profileAbout.textContent = popupProfileFormAbout.value;
   closePopup(popupProfile);
-}
+};
 formPopupProfile.addEventListener('submit', editProfile);
 
 
 function openPopupGallery() {
   formPopupGallery.reset();
+  const inputList = Array.from(popupGallery.querySelectorAll('.popup__input'));
+  toggleButtonState(inputList, btnPopupGallerySave);
+  hideError(popupGallery, popupGalleryFormName);
+  hideError(popupGallery, popupGalleryFormLink);
   openPopup(popupGallery);
-}
+  const popup = popupGallery;
+  document.addEventListener('keydown', () => closePopupByEsc(event, popup));
+  popup.addEventListener('click', () => closePopupByOverlayClick(event, popup));
+};
 btnPopupGalleryOpen.addEventListener('click', openPopupGallery);
 
 
@@ -64,6 +91,9 @@ function createCard({ name, link }) {
     imagePopupImage.src = link;
     imagePopupImage.alt = `Достопримечательность из: ${name}`;
     openPopup(imagePopup);
+    const popup = imagePopup;
+    document.addEventListener('keydown', () => closePopupByEsc(event, popup));
+    popup.addEventListener('click', () => closePopupByOverlayClick(event, popup));
   });
 
   return galleryItem;
@@ -80,7 +110,7 @@ function addNewCard(e) {
   });
   galleryElement.prepend(galleryItem);
   closePopup(popupGallery);
-}
+};
 formPopupGallery.addEventListener('submit', addNewCard);
 
 

@@ -12,3 +12,7 @@
     max-width: 282px;
   }
 }
+
+.popup__container:hover {
+  cursor: default;
+}

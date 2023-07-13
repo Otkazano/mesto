@@ -9,9 +9,9 @@
   height: 50px;
   margin: 0 36px 37px;
   border-radius: 2px;
-}
-
-.popup__btn-inactive:hover {
-  cursor: default;
-  opacity: 1;
+  pointer-events: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }

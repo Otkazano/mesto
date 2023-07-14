@@ -15,3 +15,13 @@
   -ms-user-select: none;
   user-select: none;
 }
+
+@media (max-width: 600px) {
+  .popup__btn-inactive {
+    font-size: 14px;
+    line-height: 17px;
+    width: 238px;
+    height: 46px;
+    margin: 0 22px 25px;
+  }
+}

@@ -8,6 +8,8 @@
   border-top-right-radius: 10px;
   margin: 0;
   padding: 0;
+  color: white;
+  background-color: #212121;
 }
 
 .gallery__photo:hover {

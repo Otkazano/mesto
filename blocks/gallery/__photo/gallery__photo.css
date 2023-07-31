@@ -13,5 +13,5 @@
 }
 
 .gallery__photo:hover {
-  cursor: pointer;
+  cursor: zoom-in;
 }

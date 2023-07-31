@@ -1,4 +1,4 @@
-const initialCards = [
+export const initialCards = [
   {
     name: 'Металлострой',
     link: './images/Saint-P.jpg'
@@ -25,7 +25,7 @@ const initialCards = [
   }
 ];
 
-const CONFIG = {
+export const CONFIG = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
   submitButtonSelector: '.popup__btn-save',

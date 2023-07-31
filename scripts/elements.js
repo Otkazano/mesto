@@ -13,7 +13,6 @@ const btnPopupProfileSave = document.querySelector('.popup-profile__btn-save');
 const btnPopupGalleryOpen = document.querySelector('.profile__btn-add');
 
 const galleryElement = document.querySelector('.gallery');
-const templateElement = document.querySelector('#template-gallery');
 
 const popupGallery = document.querySelector('.popup-newimage');
 const formPopupGallery = document.querySelector('.popup-newimage__form');

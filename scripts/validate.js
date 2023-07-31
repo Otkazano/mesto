@@ -1,3 +1,5 @@
+import { CONFIG } from "./constants.js";
+
 function showError(formElement, inputElement, errorMessage, config) {
   const errorElement = formElement.querySelector(`#error-${inputElement.id}`);
   inputElement.classList.add(config.inputErrorClass);

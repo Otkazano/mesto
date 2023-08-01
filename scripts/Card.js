@@ -1,9 +1,11 @@
+import { openPopup } from './index.js';
 
 class Card {
-  constructor({ name, link }, templateSelector) {
+  constructor({ name, link }, templateSelector, funcOpenPopup) {
     this._name = name;
     this._link = link;
     this._template = templateSelector;
+    this._openImagePopup = funcOpenPopup;
   }
 
   _getTemplate() {
@@ -23,8 +25,9 @@ class Card {
     ).alt = `Достопримечательность из ${this._name}`;
   }
 
-  _handleClickDelete() {
-    this._newCard.remove();
+  _handleClickDelete(btnDeleteCard) {
+    const galleryItem = btnDeleteCard.closest('.gallery__item');
+    galleryItem.remove();
   }
 
   _handleClickLike(e) {
@@ -39,7 +42,8 @@ class Card {
   }
 
   _setListeners() {
-    this._newCard.querySelector('.gallery__delete').addEventListener('click', () => this._handleClickDelete());
+    const btnDeleteCard = this._newCard.querySelector('.gallery__delete');
+    btnDeleteCard.addEventListener('click', () => this._handleClickDelete(btnDeleteCard));
 
     this._newCard.querySelector('.gallery__btn-like').addEventListener('click', (e) => this._handleClickLike(e));
 

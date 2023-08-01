@@ -33,4 +33,5 @@ export const CONFIG = {
   activeButtonClass: 'popup__btn-save',
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__error-message_active',
+  templateSelector: '#template-gallery',
 };

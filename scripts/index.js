@@ -1,17 +1,19 @@
 'use strict';
 import Card from "./Card.js";
 import { initialCards, CONFIG } from "./constants.js";
-import FormValidator from './validate.js';
+import FormValidator from './FormValidator.js';
 
 export function openPopup(popup) {
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', closePopupByEsc);
 };
 
+
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
   document.removeEventListener('keydown', closePopupByEsc);
 };
+
 
 function closePopupByEsc(event) {
   if (event.key === "Escape") {
@@ -19,11 +21,13 @@ function closePopupByEsc(event) {
   };
 };
 
+
 function closePopupByOverlayClick(event) {
   if (event.target === event.currentTarget) {
     closePopup(event.currentTarget);
   };
 };
+
 
 function setEventListenersToOverlay() {
   const overlayList = Array.from(document.querySelectorAll('.popup'));
@@ -31,25 +35,19 @@ function setEventListenersToOverlay() {
     element.addEventListener('click', closePopupByOverlayClick);
   });
 };
-
 setEventListenersToOverlay();
+
 
 buttonCloseEditProfile.addEventListener('click', () => closePopup(popupProfile));
 buttonCloseNewImage.addEventListener('click', () => closePopup(popupGallery));
 buttonCloseImage.addEventListener('click', () => closePopup(imagePopup));
 
-function cleanErrors(list, popup) {
-  list.forEach((element) => {
-    FormValidator.hideError(popup, element, CONFIG);
-  });
-};
 
 function openPopupProfile() {
   popupProfileFormName.value = profileName.textContent;
   popupProfileFormAbout.value = profileAbout.textContent;
-  const inputList = Array.from(popupProfile.querySelectorAll(CONFIG.inputSelector));
-  FormValidator.toggleButtonState(inputList, btnPopupProfileSave, CONFIG);
-  cleanErrors(inputList, popupProfile);
+  popupProfileValidated.resetFormErrors();
+	popupProfileValidated.toggleButtonState();
   openPopup(popupProfile);
 };
 btnPopupProfileOpen.addEventListener('click', openPopupProfile);
@@ -66,31 +64,38 @@ formPopupProfile.addEventListener('submit', editProfile);
 
 function openPopupGallery() {
   formPopupGallery.reset();
-  const inputList = Array.from(popupGallery.querySelectorAll(CONFIG.inputSelector));
-  FormValidator.toggleButtonState(inputList, btnPopupGallerySave, CONFIG);
-  cleanErrors(inputList, popupGallery);
+  popupGalleryValidated.resetFormErrors();
+	popupGalleryValidated.toggleButtonState();
   openPopup(popupGallery);
 };
 btnPopupGalleryOpen.addEventListener('click', openPopupGallery);
 
 
-function createCard({ name, link}, config ) {
-  const galleryItem = new Card({ name, link }, config.templateSelector );
+function createCard({ name, link }, config) {
+  const galleryItem = new Card({ name, link }, config.templateSelector);
   galleryElement.prepend(galleryItem.createCard());
 
   return galleryItem;
 }
 
+
 function addNewCard(e) {
   e.preventDefault();
   const name = popupGalleryFormName.value;
   const link = popupGalleryFormLink.value;
-  createCard ({ name , link }, CONFIG);
+  createCard({ name, link }, CONFIG);
   closePopup(popupGallery);
 };
 formPopupGallery.addEventListener('submit', addNewCard);
 
 
 initialCards.forEach(item => {
-  createCard (item, CONFIG);
+  createCard(item, CONFIG);
 });
+
+
+const popupProfileValidated = new FormValidator(CONFIG, popupProfile);
+popupProfileValidated.enableValidation();
+
+const popupGalleryValidated = new FormValidator(CONFIG, popupGallery);
+popupGalleryValidated.enableValidation();

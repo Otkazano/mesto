@@ -1,5 +1,3 @@
-import { openPopup } from './index.js';
-
 class Card {
   constructor({ name, link }, templateSelector, funcOpenPopup) {
     this._name = name;
@@ -19,10 +17,8 @@ class Card {
   _setData() {
     const galleryItem = this._newCard.querySelector('.gallery__item');
     galleryItem.querySelector('.gallery__location').textContent = this._name;
-    galleryItem.querySelector('.gallery__photo').src = this._link;
-    galleryItem.querySelector(
-      '.gallery__photo'
-    ).alt = `Достопримечательность из ${this._name}`;
+    this._galleryPhoto.src = this._link;
+    this._galleryPhoto.alt = `Достопримечательность из ${this._name}`;
   }
 
   _handleClickDelete(btnDeleteCard) {
@@ -34,12 +30,6 @@ class Card {
     e.target.classList.toggle('gallery__like_active');
   }
 
-  _handleOpenImage() {
-    imagePopupAbout.textContent = this._name;
-    imagePopupImage.src = this._link;
-    imagePopupImage.alt = `Достопримечательность из: ${this._name}`;
-    openPopup(imagePopup);
-  }
 
   _setListeners() {
     const btnDeleteCard = this._newCard.querySelector('.gallery__delete');
@@ -47,11 +37,12 @@ class Card {
 
     this._newCard.querySelector('.gallery__btn-like').addEventListener('click', (e) => this._handleClickLike(e));
 
-    this._newCard.querySelector('.gallery__photo').addEventListener('click', () => this._handleOpenImage());
+    this._galleryPhoto.addEventListener('click', () => this._openImagePopup(this._name, this._link));
   }
 
   createCard() {
     this._newCard = this._getTemplate();
+    this._galleryPhoto = this._newCard.querySelector('.gallery__photo');
     this._setData();
     this._setListeners();
 

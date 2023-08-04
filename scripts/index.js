@@ -3,7 +3,7 @@ import Card from "./Card.js";
 import { initialCards, CONFIG } from "./constants.js";
 import FormValidator from './FormValidator.js';
 
-export function openPopup(popup) {
+function openPopup(popup) {
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', closePopupByEsc);
 };
@@ -43,11 +43,19 @@ buttonCloseNewImage.addEventListener('click', () => closePopup(popupGallery));
 buttonCloseImage.addEventListener('click', () => closePopup(imagePopup));
 
 
+function openPopupImage(name, link) {
+  imagePopupAbout.textContent = name;
+  imagePopupImage.src = link;
+  imagePopupImage.alt = `Достопримечательность из: ${name}`;
+  openPopup(imagePopup);
+};
+
+
 function openPopupProfile() {
   popupProfileFormName.value = profileName.textContent;
   popupProfileFormAbout.value = profileAbout.textContent;
   popupProfileValidated.resetFormErrors();
-	popupProfileValidated.toggleButtonState();
+  popupProfileValidated.toggleButtonState();
   openPopup(popupProfile);
 };
 btnPopupProfileOpen.addEventListener('click', openPopupProfile);
@@ -65,14 +73,14 @@ formPopupProfile.addEventListener('submit', editProfile);
 function openPopupGallery() {
   formPopupGallery.reset();
   popupGalleryValidated.resetFormErrors();
-	popupGalleryValidated.toggleButtonState();
+  popupGalleryValidated.toggleButtonState();
   openPopup(popupGallery);
 };
 btnPopupGalleryOpen.addEventListener('click', openPopupGallery);
 
 
 function createCard({ name, link }, config) {
-  const galleryItem = new Card({ name, link }, config.templateSelector);
+  const galleryItem = new Card({ name, link }, config.templateSelector, openPopupImage);
   galleryElement.prepend(galleryItem.createCard());
 
   return galleryItem;

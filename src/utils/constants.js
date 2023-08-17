@@ -1,27 +1,34 @@
+import SaintP from '../images/Saint-P.jpg';
+import Baikal from '../images/Baikal.jpg';
+import Gamsutl from '../images/Gamsutl.jpg';
+import SaintP2 from '../images/Saint-P2.jpg';
+import Moscow from '../images/Moscow.jpg';
+import Arkhangelsk from '../images/Arkhangelsk.jpg';
+
 export const initialCards = [
   {
     name: 'Металлострой',
-    link: './images/Saint-P.jpg'
+    link: SaintP,
   },
   {
     name: 'Озеро Байкал',
-    link: './images/Baikal.jpg'
+    link: Baikal,
   },
   {
     name: 'Гамсутль',
-    link: './images/Gamsutl.jpg'
+    link: Gamsutl,
   },
   {
     name: 'Санкт-Петербург',
-    link: './images/Saint-P2.jpg'
+    link: SaintP2,
   },
   {
     name: 'Москва',
-    link: './images/Moscow.jpg'
+    link: Moscow,
   },
   {
     name: 'Архангельск',
-    link: './images/Arkhangelsk.jpg'
+    link: Arkhangelsk,
   }
 ];
 

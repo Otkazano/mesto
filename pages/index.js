@@ -1,116 +1,70 @@
 'use strict';
+
 import Card from "../components/Card.js";
-import { initialCards, CONFIG } from "../utils/constants.js";
 import FormValidator from '../components/FormValidator.js';
 import Section from '../components/Section.js';
-
-const section = new Section ({
-  items: initialCards,
-  renderer: (element) => {
-    const card = new Card(element, '#template-gallery', openPopupImage);
-    return card.createCard();
-  }
-}, '.gallery');
-section.renderItems;
-
-// function openPopup(popup) {
-//   popup.classList.add('popup_opened');
-//   document.addEventListener('keydown', closePopupByEsc);
-// };
+import PopupWithForm from '../components/PopupWithForm.js';
+import PopupWithImage from '../components/PopupWithImage.js';
+import UserInfo from '../components/UserInfo.js';
+import { initialCards, CONFIG } from "../utils/constants.js";
+import { btnPopupProfileOpen, popupProfile, popupProfileFormName, popupProfileFormAbout, btnPopupGalleryOpen, popupGallery } from "../utils/elements.js";
 
 
-// function closePopup(popup) {
-//   popup.classList.remove('popup_opened');
-//   document.removeEventListener('keydown', closePopupByEsc);
-// };
+function openPopupImage(name, link) {
+  popupWithImage.open({ name, link });
+};
 
+function createCard(element, templateSelector, func) {
+  const card = new Card(element, templateSelector, func);
+  return card.createCard();
+};
 
-// function closePopupByEsc(event) {
-//   if (event.key === "Escape") {
-//     closePopup(document.querySelector('.popup_opened'));
-//   };
-// };
+function addNewCard(formData) {
+  const cardElement = createCard({ name: formData['nameNewImage'], link: formData['linkNewImage'] }, CONFIG.templateSelector, openPopupImage);
+  cardsList.setItem(cardElement);
+};
 
-
-// function closePopupByOverlayClick(event) {
-//   if (event.target === event.currentTarget) {
-//     closePopup(event.currentTarget);
-//   };
-// };
-
-
-// function setEventListenersToOverlay() {
-//   const overlayList = Array.from(document.querySelectorAll('.popup'));
-//   overlayList.forEach((element) => {
-//     element.addEventListener('click', closePopupByOverlayClick);
-//   });
-// };
-// setEventListenersToOverlay();
-
-
-// buttonCloseEditProfile.addEventListener('click', () => closePopup(popupProfile));
-// buttonCloseNewImage.addEventListener('click', () => closePopup(popupGallery));
-// buttonCloseImage.addEventListener('click', () => closePopup(imagePopup));
-
-
-// function openPopupImage(name, link) {
-//   imagePopupAbout.textContent = name;
-//   imagePopupImage.src = link;
-//   imagePopupImage.alt = `Достопримечательность из: ${name}`;
-//   openPopup(imagePopup);
-// };
-
+function editProfile(formData) {
+  userInfo.setUserInfo(formData);
+}
 
 function openPopupProfile() {
-  popupProfileFormName.value = profileName.textContent;
-  popupProfileFormAbout.value = profileAbout.textContent;
+  const { name, about } = userInfo.getUserInfo();
+  popupProfileFormName.value = name;
+  popupProfileFormAbout.value = about;
   popupProfileValidated.resetFormErrors();
   popupProfileValidated.toggleButtonState();
-  openPopup(popupProfile);
+  popupWithProfile.open();
 };
 btnPopupProfileOpen.addEventListener('click', openPopupProfile);
 
-
-function editProfile(e) {
-  e.preventDefault();
-  profileName.textContent = popupProfileFormName.value;
-  profileAbout.textContent = popupProfileFormAbout.value;
-  closePopup(popupProfile);
-};
-formPopupProfile.addEventListener('submit', editProfile);
-
-
 function openPopupGallery() {
-  formPopupGallery.reset();
   popupGalleryValidated.resetFormErrors();
   popupGalleryValidated.toggleButtonState();
-  openPopup(popupGallery);
+  popupWithNewImage.open();
 };
 btnPopupGalleryOpen.addEventListener('click', openPopupGallery);
 
 
-// function createCard({ name, link }, config) {
-//   const galleryItem = new Card({ name, link }, config.templateSelector, openPopupImage);
-//   galleryElement.prepend(galleryItem.createCard());
+const popupWithImage = new PopupWithImage(CONFIG.popupImageSelector);
+popupWithImage.setEventListeners();
 
-//   return galleryItem;
-// }
+const popupWithNewImage = new PopupWithForm({ selector: CONFIG.popupNewImageSelector, submitFunction: addNewCard });
+popupWithNewImage.setEventListeners();
 
+const popupWithProfile = new PopupWithForm({ selector: CONFIG.popupProfileSelector, submitFunction: editProfile });
+popupWithProfile.setEventListeners();
 
-function addNewCard(e) {
-  e.preventDefault();
-  const name = popupGalleryFormName.value;
-  const link = popupGalleryFormLink.value;
-  createCard({ name, link }, CONFIG);
-  closePopup(popupGallery);
-};
-formPopupGallery.addEventListener('submit', addNewCard);
+const userInfo = new UserInfo(CONFIG);
 
-
-// initialCards.forEach(item => {
-//   createCard(item, CONFIG);
-// });
-
+const cardsList = new Section({
+  items: initialCards,
+  renderer: element => {
+    const cardElement = createCard(element, CONFIG.templateSelector, openPopupImage);
+    cardsList.setItem(cardElement);
+  }
+}, CONFIG.gallerySelector);
+cardsList.renderItems();
 
 const popupProfileValidated = new FormValidator(CONFIG, popupProfile);
 popupProfileValidated.enableValidation();

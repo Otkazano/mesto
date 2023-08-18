@@ -42,11 +42,13 @@ export default class FormValidator {
   _activeButtonSave() {
     this._buttonElement.classList.remove(this._activeButtonClass);
     this._buttonElement.classList.add(this._inactiveButtonClass);
+    this._buttonElement.disabled = true;
   };
 
   _inactiveButtonSave() {
     this._buttonElement.classList.add(this._activeButtonClass);
     this._buttonElement.classList.remove(this._inactiveButtonClass);
+    this._buttonElement.disabled = false;
   }
 
   _setEventListeners() {

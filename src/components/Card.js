@@ -28,7 +28,7 @@ export default class Card {
   }
 
   _handleClickLike(e) {
-    e.target.classList.toggle('gallery__like_active');
+    e.target.classList.toggle('gallery__likes-icon_active');
   }
 
 

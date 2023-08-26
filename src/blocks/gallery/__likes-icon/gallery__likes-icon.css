@@ -1,4 +1,4 @@
-.gallery__like {
+.gallery__likes-icon {
   width: 22px;
   height: 19px;
   background-image: url(../../../images/like.svg);
@@ -9,7 +9,7 @@
   padding: 0;
 }
 
-.gallery__like:hover {
+.gallery__likes-icon:hover {
   opacity: 0.5;
   cursor: pointer;
 }

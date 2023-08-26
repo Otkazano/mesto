@@ -26,7 +26,7 @@ function addNewCard(formData) {
 
 function editProfile(formData) {
   userInfo.setUserInfo(formData);
-}
+};
 
 function openPopupProfile() {
   const { name, about } = userInfo.getUserInfo();
@@ -71,3 +71,25 @@ popupProfileValidated.enableValidation();
 
 const popupGalleryValidated = new FormValidator(CONFIG, popupGallery);
 popupGalleryValidated.enableValidation();
+
+
+
+
+
+// document.querySelector('.profile__avatar-btn').addEventListener('click', openNewAvatarPopup);
+
+// function showOK() {
+//   console.log("I'm Ok!")
+// };
+
+// function openNewAvatarPopup() {
+//   na.open();
+// };
+
+// const sds = document.querySelector('.popup-newAvatar');
+
+// const naa = new FormValidator(CONFIG, sds);
+// naa.enableValidation();
+
+// const na = new PopupWithForm({ selector: '.popup-newAvatar', submitFunction: showOK });
+// na.setEventListeners();

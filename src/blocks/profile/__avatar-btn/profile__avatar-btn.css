@@ -15,4 +15,5 @@
 .profile__avatar-btn:hover {
   opacity: 1;
   border: 0;
+  cursor: pointer;
 }

@@ -95,7 +95,7 @@ function editProfile(formData) {
     console.log(err);
   })
   .finally(() => {
-    popupWithNewAvatar.renderSaving(false);
+    popupWithProfile.renderSaving(false);
   })
 };
 

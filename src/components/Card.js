@@ -34,8 +34,8 @@ export default class Card {
   }
 
   removeCard() {
-    this._galleryItem = null;
     this._galleryItem.remove();
+    this._galleryItem = null;
   }
 
   _checkLike() {
@@ -44,8 +44,9 @@ export default class Card {
     });
   }
 
-  setLikes() {
-    this._quantityLikes.textContent = this._likes.length;
+  setLikes(arr) {
+    this._quantityLikes.textContent = arr.length;
+    this._likes = arr;
     if (this._checkLike()) {
       this._btnLikeCard.classList.add('gallery__likes-icon_active');
     } else {
@@ -61,7 +62,7 @@ export default class Card {
 
   createCard() {
     this._setData();
-    this.setLikes();
+    this.setLikes(this._likes);
     this._setListeners();
 
     return this._newCard;

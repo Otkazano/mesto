@@ -4,6 +4,7 @@ export const CONFIG = {
   submitButtonSelector: '.popup__btn-save',
   profileNameSelector: '.profile__name',
   profileAboutSelector: '.profile__about',
+  profileAvatarSelector: '.profile__avatar-img',
   popupImageSelector: '.popup-image',
   popupNewImageSelector: '.popup-newImage',
   popupProfileSelector: '.popup-profile',

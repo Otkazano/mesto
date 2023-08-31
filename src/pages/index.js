@@ -16,44 +16,43 @@ function openPopupImage(name, link) {
   popupWithImage.open({ name, link });
 };
 
-function deleteCardHandel(id, card) {
-  popupWithAgree.setSubmitAction(() => openPopupAgree(id, card));
+function deleteCardHandler(id, card) {
+  popupWithAgree.setSubmitAction(() => {
+    popupWithAgree.renderSaving(true);
+
+    api.deleteCard(id)
+    .then(() => {
+      card.removeCard();
+      popupWithAgree.close();
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() => {
+      popupWithAgree.renderSaving(false);
+    });
+  });
   popupWithAgree.open();
 }
 
-function openPopupAgree(id, card) {
-  api.deleteCard(id)
-  .then(() => {
-    card.removeCard();
-    popupNewAvatar.close();
-  })
-  .catch((err) => {
-    console.log(err);
-  });
-}
-
-function likeCardHandle(id, isLiked, card) {
+function likeCardHandler(id, isLiked, card) {
   if (isLiked) {
     api.dislikeCard(id)
-    .then(() => {
-      card.setLikes();
+    .then((data) => {
+      console.log(data);
+      card.setLikes(data.likes);
     })
     .catch((err) => {
       console.log(err);
-    })
-    .finally(() => {
-      card.setLikes()
     })
   } else {
     api.likeCard(id)
-    .then(() => {
-      card.setLikes();
+    .then((data) => {
+      console.log(data);
+      card.setLikes(data.likes);
     })
     .catch((err) => {
       console.log(err);
-    })
-    .finally(() => {
-      card.setLikes()
     })
   }
 }
@@ -62,8 +61,8 @@ function createCard(data, id) {
   const card = new Card({
     data: data,
     funcOpenPopup: openPopupImage,
-    funcDeleteCard: deleteCardHandel,
-    funcLikeCard: likeCardHandle,
+    funcDeleteCard: deleteCardHandler,
+    funcLikeCard: likeCardHandler,
   }, CONFIG.templateSelector, id);
   return card.createCard();
 };
@@ -73,7 +72,7 @@ function addNewCard(formData) {
 
   api.createCard(formData)
   .then((data) => {
-    cardsList.setItem(createCard(data, data.owner._id));
+    cardsList.setItemByPrepend(createCard(data, data.owner._id));
     popupWithNewImage.close();
   })
   .catch((err) => {
@@ -100,12 +99,12 @@ function editProfile(formData) {
   })
 };
 
-function handlePopupNewAvatar(formData) {
+function editNewAvatar(formData) {
   popupWithNewAvatar.renderSaving(true);
-
+  
   api.changeUserAvatar(formData)
   .then((data) => {
-    userInfo.setUserInfo(data);
+    userInfo.setUserAvatar(data.avatar);
     popupWithNewAvatar.close();
   })
   .catch((err) => {
@@ -117,7 +116,7 @@ function handlePopupNewAvatar(formData) {
 };
 
 function openPopupProfile() {
-  const { name, about } = userInfo.getUserInfo();
+  const { name, about} = userInfo.getUserInfo();
   popupProfileFormName.value = name;
   popupProfileFormAbout.value = about;
   popupProfileValidated.resetFormErrors();
@@ -153,7 +152,7 @@ popupWithNewImage.setEventListeners();
 const popupWithProfile = new PopupWithForm({ selector: CONFIG.popupProfileSelector, submitFunction: editProfile });
 popupWithProfile.setEventListeners();
 
-const popupWithNewAvatar = new PopupWithForm({ selector: CONFIG.popupNewAvatarSelector, submitFunction: handlePopupNewAvatar}) ;
+const popupWithNewAvatar = new PopupWithForm({ selector: CONFIG.popupNewAvatarSelector, submitFunction: editNewAvatar}) ;
 popupWithNewAvatar.setEventListeners();
 
 const userInfo = new UserInfo(CONFIG);
@@ -174,6 +173,7 @@ popupGalleryValidated.enableValidation();
 const popupNewAvatarValidate = new FormValidator(CONFIG, popupNewAvatar);
 popupNewAvatarValidate.enableValidation();
 
+
 const api = new Api({
   url: 'https://mesto.nomoreparties.co/v1/cohort-74',
   headers: {
@@ -184,12 +184,9 @@ const api = new Api({
 
 Promise.all([
   api.getUserData(),
-  api.getAllCards()
+  api.getAllCards(),
 ])
 .then((values) => {
-  console.log(values[0]);
-  console.log(values[1]);
-
   userInfo.setUserInfo(values[0]);
   cardsList.renderItems(values[1], values[0]._id);
 })

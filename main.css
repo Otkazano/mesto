@@ -41,5 +41,6 @@
 .popup__error-message_active{opacity:1}
 .popup_theme_dark{background-color:rgba(0,0,0,.9)}
 .popup-agreeDelete__title{margin-bottom:38px}
+.popup-agreeDelete__form{margin:0;padding:0}
 .popup_opened{opacity:1;visibility:visible}
 

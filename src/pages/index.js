@@ -186,9 +186,9 @@ Promise.all([
   api.getUserData(),
   api.getAllCards(),
 ])
-.then((values) => {
-  userInfo.setUserInfo(values[0]);
-  cardsList.renderItems(values[1], values[0]._id);
+.then(([person, cards]) => {
+  userInfo.setUserInfo(person);
+  cardsList.renderItems(cards, person._id);
 })
 .catch((err) => {
   console.log(err);

@@ -9,7 +9,7 @@
 ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
 ![Webpack](https://img.shields.io/badge/webpack-%238DD6F9.svg?style=for-the-badge&logo=webpack&logoColor=black)
 ![BEM](https://img.shields.io/badge/BEM-74aa9c?style=for-the-badge) 
-![ООП](https://img.shields.io/badge/ООП-97c?style=for-the-badge) 
+![ООP](https://img.shields.io/badge/ООP-97c?style=for-the-badge) 
 
 ### Функционал проекта:
 * Редактирование аватара и профиля;
